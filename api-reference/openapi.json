@@ -1,217 +1,262 @@
 {
-  "openapi": "3.0.1",
+  "openapi": "3.0.0",
   "info": {
-    "title": "AVABRAIN",
-    "description": "",
+    "title": "AvaMind",
+    "description": "Addressing student dropout is a prominent concern within contemporary university settings. Through seamless interaction with this interface in accordance with the established contract, you can effortlessly anticipate the likelihood of student dropout. Entrust the complexities of this task to us, and allow us to streamline the process for you.",
     "version": "1.0.0"
   },
+  "servers": [
+    {
+      "url": "http://{{base_url}}"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "apikeyAuth": {
+        "type": "http",
+        "scheme": "apikey"
+      }
+    }
+  },
+  "security": [
+    {
+      "apikeyAuth": []
+    }
+  ],
   "tags": [
     {
-      "name": "Consultas"
+      "name": "Queries"
     }
   ],
   "paths": {
+    "/health": {
+      "get": {
+        "tags": ["Queries"],
+        "summary": "API health",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Tue, 12 Dec 2023 00:19:14 GMT"
+                }
+              },
+              "server": {
+                "schema": {
+                  "type": "string",
+                  "example": "uvicorn"
+                }
+              },
+              "content-length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "15"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "status": "ok"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/q": {
       "post": {
-        "summary": "Consultar aluno",
-        "x-apidog-folder": "Consultas",
-        "x-apidog-status": "developing",
-        "deprecated": false,
-        "description": "Rota responsável por consultar o status de um aluno como estudante",
-        "tags": [
-          "Consultas"
-        ],
-        "parameters": [],
+        "tags": ["Queries"],
+        "summary": "Query a student",
+        "description": "Queries a student to get its dropout rate.",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {
-                  "experience_level": {
-                    "type": "integer",
-                    "title": "Student experience level",
-                    "description": "FRESHMAN/SOPHOMORE",
-                    "enum": [
-                      "FRESHMAN",
-                      "SOPHOMORE"
-                    ],
-                    "x-apidog": {
-                      "enumDescriptions": {
-                        "FRESHMAN": "0",
-                        "SOPHOMORE": "1"
-                      }
-                    },
-                    "format": "uint32"
-                  },
-                  "modality": {
-                    "type": "integer",
-                    "description": "ONLINE/IN-PERSON",
-                    "enum": [
-                      "IN_PERSON",
-                      "ONLINE"
-                    ],
-                    "x-apidog": {
-                      "enumDescriptions": {
-                        "IN_PERSON": "0",
-                        "ONLINE": "1"
-                      }
-                    },
-                    "format": "uint32",
-                    "title": "Student modality"
-                  },
+                "example": {
+                  "experience_level": 0,
+                  "modality": 0,
                   "data": {
-                    "type": "object",
-                    "properties": {},
-                    "x-apidog-orders": [],
-                    "description": "Student columns",
-                    "x-apidog-ignore-properties": []
+                    "CURSO": "Engenharia",
+                    "IDADE": 24,
+                    "QTD_BOLETOS_ATRASADOS": 0,
+                    "JA_TRANCOU_ANTES": 1,
+                    "DISC_ABAIXO_DA_MEDIA": 0
                   }
-                },
-                "x-apidog-orders": [
-                  "experience_level",
-                  "modality",
-                  "data"
-                ],
-                "required": [
-                  "experience_level",
-                  "modality",
-                  "data"
-                ],
-                "x-apidog-ignore-properties": []
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {},
-                  "x-apidog-ignore-properties": [],
-                  "x-apidog-orders": []
                 }
               }
             }
           }
         },
-        "x-run-in-apidog": "https://apidog.com/web/project/425159/apis/api-4903119-run",
-        "security": []
+        "security": [
+          {
+            "apikeyAuth": []
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sun, 10 Dec 2023 20:50:59 GMT"
+                }
+              },
+              "server": {
+                "schema": {
+                  "type": "string",
+                  "example": "uvicorn"
+                }
+              },
+              "content-length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "22"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "probability": "0.35"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sun, 10 Dec 2023 20:51:56 GMT"
+                }
+              },
+              "server": {
+                "schema": {
+                  "type": "string",
+                  "example": "uvicorn"
+                }
+              },
+              "content-length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "142"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "examples": {
+                  "example-0": {
+                    "summary": "Bad request hint",
+                    "value": {
+                      "detail": "Invalid experience level, must be one of FRESHMAN=0, SOPHOMORE=1, UNDERGRADUATE=2, POSTGRADUATE=3, JUNIOR=4, SENIOR=5, GRADUATE=6"
+                    }
+                  },
+                  "example-1": {
+                    "summary": "Bad request wrong column",
+                    "value": {
+                      "detail": "Column IDADDE not found in training data for this kind of student. The columns are: ['CURSO', 'IDADE', 'QTD_BOLETOS_ATRASADOS', 'JA_TRANCOU_ANTES', 'DISC_ABAIXO_DA_MEDIA']"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Unprocessable Entity",
+            "headers": {
+              "date": {
+                "schema": {
+                  "type": "string",
+                  "example": "Sun, 10 Dec 2023 20:51:30 GMT"
+                }
+              },
+              "server": {
+                "schema": {
+                  "type": "string",
+                  "example": "uvicorn"
+                }
+              },
+              "content-length": {
+                "schema": {
+                  "type": "integer",
+                  "example": "274"
+                }
+              },
+              "content-type": {
+                "schema": {
+                  "type": "string",
+                  "example": "application/json"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                },
+                "example": {
+                  "detail": [
+                    {
+                      "type": "missing",
+                      "loc": [
+                        "body",
+                        "experience_level"
+                      ],
+                      "msg": "Field required",
+                      "input": {
+                        "modality": 0,
+                        "data": {
+                          "CURSO": "Engenharia",
+                          "IDADE": 24,
+                          "QTD_BOLETOS_ATRASADOS": 0,
+                          "JA_TRANCOU_ANTES": 1,
+                          "DISC_ABAIXO_DA_MEDIA": 0
+                        }
+                      },
+                      "url": "https://errors.pydantic.dev/2.5/v/missing"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
       }
     }
-  },
-  "components": {
-    "schemas": {
-      "Tag": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 1,
-            "description": "Tag ID"
-          },
-          "name": {
-            "type": "string",
-            "description": "Tag Name"
-          }
-        },
-        "x-apidog-orders": [
-          "id",
-          "name"
-        ],
-        "x-apidog-ignore-properties": [],
-        "x-apidog-folder": "Sample Schemas"
-      },
-      "Category": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 1,
-            "description": "Category ID"
-          },
-          "name": {
-            "type": "string",
-            "description": "Category Name"
-          }
-        },
-        "x-apidog-orders": [
-          "id",
-          "name"
-        ],
-        "x-apidog-ignore-properties": [],
-        "x-apidog-folder": "Sample Schemas"
-      },
-      "Pet": {
-        "required": [
-          "name",
-          "photoUrls",
-          "id",
-          "category",
-          "tags",
-          "status"
-        ],
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "integer",
-            "format": "int64",
-            "minimum": 1,
-            "description": "Pet ID"
-          },
-          "category": {
-            "$ref": "#/components/schemas/Category",
-            "description": "group"
-          },
-          "name": {
-            "type": "string",
-            "description": "name",
-            "examples": [
-              "doggie"
-            ]
-          },
-          "photoUrls": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "description": "image URL"
-          },
-          "tags": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Tag"
-            },
-            "description": "tag"
-          },
-          "status": {
-            "type": "string",
-            "description": "Pet Sales Status",
-            "enum": [
-              "available",
-              "pending",
-              "sold"
-            ]
-          }
-        },
-        "x-apidog-orders": [
-          "id",
-          "category",
-          "name",
-          "photoUrls",
-          "tags",
-          "status"
-        ],
-        "x-apidog-ignore-properties": [],
-        "x-apidog-folder": "Sample Schemas"
-      }
-    },
-    "securitySchemes": {}
-  },
-  "servers": []
+  }
 }
