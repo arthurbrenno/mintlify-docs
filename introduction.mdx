@@ -1,6 +1,6 @@
 ---
-title: Introduction
-description: 'Welcome to the home of your new documentation'
+title: Introdução
+description: 'Bem-vindo à documentação da Inteligência artificial de evasão do novo SAE'
 ---
 
 <img
@@ -14,58 +14,100 @@ description: 'Welcome to the home of your new documentation'
   alt="Hero Dark"
 />
 
-## Setting up
+## Configuração
 
-The first step to world-class documentation is setting up your editing environnments.
+O primeiro passo para uma documentação de classe mundial é configurar seu ambiente de edição.
 
 <CardGroup cols={2}>
   <Card
-    title="Edit Your Docs"
+    title="Edite seus documentos"
     icon="pen-to-square"
     href="https://mintlify.com/docs/quickstart"
   >
-    Get your docs set up locally for easy development
+    Configure seus documentos localmente para um desenvolvimento fácil.
   </Card>
   <Card
-    title="Preview Changes"
+    title="Visualize as alterações"
     icon="image"
     href="https://mintlify.com/docs/development"
   >
-    Preview your changes before you push to make sure they're perfect
+    Visualize suas alterações antes de enviar para garantir que estejam perfeitas.
   </Card>
 </CardGroup>
 
-## Make it yours
+## Personalize
 
-Update your docs to your brand and add valuable content for the best user conversion.
+Atualize seus documentos para a sua marca e adicione conteúdo valioso para a melhor conversão de usuários.
 
 <CardGroup cols={2}>
   <Card
-    title="Customize Style"
+    title="Personalize o estilo"
     icon="palette"
     href="https://mintlify.com/docs/settings/global"
   >
-    Customize your docs to your company's colors and brands
+    Personalize seus documentos com as cores e marcas da sua empresa.
   </Card>
   <Card
-    title="Reference APIs"
+    title="Referencie APIs"
     icon="code"
     href="https://mintlify.com/docs/api-playground/openapi"
   >
-    Automatically generate endpoints from an OpenAPI spec
+    Gere automaticamente pontos de extremidade a partir de uma especificação OpenAPI.
   </Card>
   <Card
-    title="Add Components"
+    title="Adicione componentes"
     icon="screwdriver-wrench"
     href="https://mintlify.com/docs/components/accordion"
   >
-    Build interactive features and designs to guide your users
+    Construa recursos e designs interativos para orientar seus usuários.
   </Card>
   <Card
-    title="Get Inspiration"
+    title="Obtenha inspiração"
     icon="stars"
     href="https://mintlify.com/showcase"
   >
-    Check out our showcase of our favorite documentation
+    Confira nossa seleção de documentações favoritas.
   </Card>
 </CardGroup>
+
+## Evasão na Educação
+
+### Introdução
+
+A evasão é um problema sério na educação. Um aluno que abandona os estudos acadêmicos tem grandes chances de não obter sucesso na vida profissional de alto nível. Neste contexto, medidas foram tomadas para conter a evasão dos estudantes da Universidade de Uberaba, utilizando soluções inteligentes com técnicas de Machine Learning.
+
+### Ambiente de Desenvolvimento
+
+Os dados estão sendo treinados localmente, via Jupyter Notebook em um ambiente de desenvolvimento com a linguagem Python. As bibliotecas utilizadas incluem scikit-learn, TensorFlow, NumPy e Pandas.
+
+...
+
+### Modelo de Aprendizagem de Máquina
+
+Para uma classificação adequada, utilizamos Regressão Logística, permitindo a previsão da probabilidade de evasão do aluno.
+
+...
+
+### Dados Capturados
+
+Os dados capturados serão utilizados tanto para treinamento quanto para consulta de um novo aluno. No caso da consulta de um novo aluno, não passaremos a variável dependente "Status de evasão", uma vez que é um parâmetro que precisamos prever e ainda não o temos.
+
+...
+
+### Resumo da Query
+
+Gerar uma tabela com todos os alunos do presencial e do EAD (apenas período do primeiro semestre) com as colunas selecionadas. Usar GROUP BY para agrupar por estudante.
+
+...
+
+### Segundo Modelo
+
+O segundo modelo é focado no segundo semestre em diante dos alunos presenciais. Ele conta com os seguintes critérios para treinamento:
+
+...
+
+### Resumo da Query
+
+Gerar uma tabela com todos os alunos do presencial (apenas período segundo semestre pra frente) com os parâmetros selecionados. Usar GROUP BY para agrupar por estudante.
+
+...
