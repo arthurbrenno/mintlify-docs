@@ -1,195 +1,217 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI Plant Store",
-    "description": "A sample API that uses a plant store as an example to demonstrate features in the OpenAPI specification",
-    "license": {
-      "name": "MIT"
-    },
+    "title": "AVABRAIN",
+    "description": "",
     "version": "1.0.0"
   },
-  "servers": [
+  "tags": [
     {
-      "url": "http://sandbox.mintlify.com"
-    }
-  ],
-  "security": [
-    {
-      "bearerAuth": []
+      "name": "Consultas"
     }
   ],
   "paths": {
-    "/plants": {
-      "get": {
-        "description": "Returns all plants from the system that the user has access to",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Plant response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/q": {
       "post": {
-        "description": "Creates a new plant in the store",
+        "summary": "Consultar aluno",
+        "x-apidog-folder": "Consultas",
+        "x-apidog-status": "developing",
+        "deprecated": false,
+        "description": "Rota responsável por consultar o status de um aluno como estudante",
+        "tags": [
+          "Consultas"
+        ],
+        "parameters": [],
         "requestBody": {
-          "description": "Plant to add to the store",
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewPlant"
+                "type": "object",
+                "properties": {
+                  "experience_level": {
+                    "type": "integer",
+                    "title": "Student experience level",
+                    "description": "FRESHMAN/SOPHOMORE",
+                    "enum": [
+                      "FRESHMAN",
+                      "SOPHOMORE"
+                    ],
+                    "x-apidog": {
+                      "enumDescriptions": {
+                        "FRESHMAN": "0",
+                        "SOPHOMORE": "1"
+                      }
+                    },
+                    "format": "uint32"
+                  },
+                  "modality": {
+                    "type": "integer",
+                    "description": "ONLINE/IN-PERSON",
+                    "enum": [
+                      "IN_PERSON",
+                      "ONLINE"
+                    ],
+                    "x-apidog": {
+                      "enumDescriptions": {
+                        "IN_PERSON": "0",
+                        "ONLINE": "1"
+                      }
+                    },
+                    "format": "uint32",
+                    "title": "Student modality"
+                  },
+                  "data": {
+                    "type": "object",
+                    "properties": {},
+                    "x-apidog-orders": [],
+                    "description": "Student columns",
+                    "x-apidog-ignore-properties": []
+                  }
+                },
+                "x-apidog-orders": [
+                  "experience_level",
+                  "modality",
+                  "data"
+                ],
+                "required": [
+                  "experience_level",
+                  "modality",
+                  "data"
+                ],
+                "x-apidog-ignore-properties": []
               }
             }
-          },
-          "required": true
+          }
         },
         "responses": {
           "200": {
-            "description": "plant response",
+            "description": "OK",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Plant"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "type": "object",
+                  "properties": {},
+                  "x-apidog-ignore-properties": [],
+                  "x-apidog-orders": []
                 }
               }
             }
           }
-        }
-      }
-    },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
+        },
+        "x-run-in-apidog": "https://apidog.com/web/project/425159/apis/api-4903119-run",
+        "security": []
       }
     }
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
+      "Tag": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Tag ID"
+          },
+          "name": {
+            "type": "string",
+            "description": "Tag Name"
+          }
+        },
+        "x-apidog-orders": [
+          "id",
           "name"
         ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Sample Schemas"
+      },
+      "Category": {
         "type": "object",
         "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64",
+            "minimum": 1,
+            "description": "Category ID"
+          },
           "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
+            "type": "string",
+            "description": "Category Name"
           }
-        }
+        },
+        "x-apidog-orders": [
+          "id",
+          "name"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Sample Schemas"
       },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
-              }
-            }
-          }
-        ]
-      },
-      "Error": {
+      "Pet": {
         "required": [
-          "error",
-          "message"
+          "name",
+          "photoUrls",
+          "id",
+          "category",
+          "tags",
+          "status"
         ],
         "type": "object",
         "properties": {
-          "error": {
+          "id": {
             "type": "integer",
-            "format": "int32"
+            "format": "int64",
+            "minimum": 1,
+            "description": "Pet ID"
           },
-          "message": {
-            "type": "string"
+          "category": {
+            "$ref": "#/components/schemas/Category",
+            "description": "group"
+          },
+          "name": {
+            "type": "string",
+            "description": "name",
+            "examples": [
+              "doggie"
+            ]
+          },
+          "photoUrls": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "description": "image URL"
+          },
+          "tags": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tag"
+            },
+            "description": "tag"
+          },
+          "status": {
+            "type": "string",
+            "description": "Pet Sales Status",
+            "enum": [
+              "available",
+              "pending",
+              "sold"
+            ]
           }
-        }
+        },
+        "x-apidog-orders": [
+          "id",
+          "category",
+          "name",
+          "photoUrls",
+          "tags",
+          "status"
+        ],
+        "x-apidog-ignore-properties": [],
+        "x-apidog-folder": "Sample Schemas"
       }
     },
-    "securitySchemes": {
-      "bearerAuth": {
-        "type": "http",
-        "scheme": "bearer"
-      }
-    }
-  }
+    "securitySchemes": {}
+  },
+  "servers": []
 }
